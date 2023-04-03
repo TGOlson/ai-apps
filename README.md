@@ -1,15 +1,9 @@
-# app-skelly
+# ai-apps
 
-Template for simple client-only applications. Configured for my preferences and getting started quickly.
+A bunch of tiny AI apps. For fun!
 
-Just run `npx webpack serve`.
+### dev
 
-Includes:
-
-* webpack
-* typescript
-* eslint
-* react
-* joy ui (https://mui.com/joy-ui/getting-started/overview/)
-
-Does not include: routing, app state management (redux), or server setup.
+```
+npx webpack serve
+```
