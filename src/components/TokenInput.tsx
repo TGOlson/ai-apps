@@ -1,22 +1,44 @@
 import React from 'react';
 
 import Input from '@mui/joy/Input';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import FormHelperText from '@mui/joy/FormHelperText';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import Tooltip from '@mui/joy/Tooltip';
+import { Box, Typography } from '@mui/joy';
+import KeyIcon from '@mui/icons-material/Key';
+// import { IconButton } from '@mui/joy';
 
-type TokenInputProps = {
-  defaultValue?: string;
-  onChange: (token: string) => void;
-};
+const TokenInput = () => {
+  const initialValue = localStorage.getItem('opanai-token');
 
-const TokenInput = ({defaultValue, onChange}: TokenInputProps) => {
+  const onChange = (token: string) => {
+    localStorage.setItem('opanai-token', token);
+  };
+
+  const tooltip = (
+    <Box sx={{width: 350}}>
+      <Typography level='inherit'>
+        If you don&apos;t already have an API key, you can create one for free at <a href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a>.
+      </Typography>
+    </Box>
+  );
+  
+
   return (
-    <FormControl>
-      <FormLabel>Open AI API Key</FormLabel>
-      <Input placeholder='sk-...' defaultValue={defaultValue} onChange={e => onChange(e.target.value)}/>
-      <FormHelperText>Find yours at: https://platform.openai.com/account/api-keys</FormHelperText>
-    </FormControl>
+    <Input 
+      size='sm' 
+      type='password'
+      sx={{ width: 300 }}
+      placeholder='OpenAI API Key' 
+      defaultValue={initialValue ?? undefined} 
+      onChange={event => onChange(event.target.value)}
+      startDecorator={<KeyIcon />}
+      endDecorator={
+        <Tooltip title={tooltip} variant="soft" size='sm'>
+          <HelpOutlineIcon color='primary' />
+        </Tooltip>
+      
+      }
+    />
   );
 };
 

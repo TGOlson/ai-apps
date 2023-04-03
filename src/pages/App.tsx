@@ -5,65 +5,113 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import Stack from '@mui/joy/Stack';
 import Button from '@mui/joy/Button';
 
-import TokenInput from '../components/TokenInput';
-import PromptInput from '../components/PromptInput';
+// import PromptInput from '../components/PromptInput';
 import ResponseDisplay from '../components/ResponseDisplay';
 import { Message, streamChatGPTCompletions } from '../util';
+import Header from '../components/Header';
+import { Box, Card, Input, Typography } from '@mui/joy';
 
 const App = () => {
-  const storedToken = localStorage.getItem('opanai-token');
-
-  const [token, setToken] = React.useState(storedToken ?? '');
+  
   const [prompt, setPrompt] = React.useState('');
   const [response, setResponse] = React.useState<string | null>(null);
 
-  const onTokenChange = (token: string) => {
-    setToken(token);
-    localStorage.setItem('opanai-token', token);
-  };
-
   const onClick = () => {
-    const messages: Message[] = [{
-      role: 'user',
-      content: prompt,
-    }];
+    void fetch(prompt)
+      .then(response => response.text())
+      .then(code => {
 
-    streamChatGPTCompletions({token}, messages)
-      .then(async (stream) => {
-        const reader = stream.getReader();
+        const content = `
+        You are an expert programmer in all languages. Given a code snippet, please provide a concise code review. 
+        
+        When reviewing the code, make sure you consider the following:
+          * Bugs that would make things not work as expected
+          * Security issues
+          * Performance improvements
+          * Code that would be complex to maintain
+          * Code duplication
+          * Descriptive variable and function names
+          * Any other issues you can think of
 
+        Please us the below template for your response:
+
+        ---
+
+        Programming language: {language}
+        Code quality score (out of 10): {score}
+        
+        Code review: {review}
+
+        Should we merge this code to production: {thumbs up or down}
+
+        ---
+
+        Here is the code to review (do not include this in your response):
+        ${code}
+        `;
+
+        const messages: Message[] = [{
+          role: 'user',
+          content: content,
+        }];
+        
+        const token = localStorage.getItem('opanai-token');
+
+        if (!token) {
+          // todo: handler more gracefully
+          throw new Error('No token found');
+        }
+
+        streamChatGPTCompletions({token}, messages)
+        .then(async (stream) => {
+          const reader = stream.getReader();
+          
         let result = '';
 
         while (true) {
           const {done, value} = await reader.read();
           if (done) break;
-
+          
           const delta = value.choices[0]?.delta.content;
           if (delta !== undefined) result += delta;
-
+          
           setResponse(result);
         }
       }).catch(error => {
         console.error(error);
       });
+    });
   };
 
   return (
     <CssVarsProvider>
       <CssBaseline />
-      
-      <Stack direction='row'>
-        <Stack sx={{gap: 2, width: 400, m: 2}}>
-          <TokenInput onChange={onTokenChange} defaultValue={token}/>
-          <PromptInput onChange={setPrompt}/>
-          <Button onClick={onClick}>Submit</Button>
-        </Stack>
+        <Header />
 
-        <Stack sx={{gap: 2, width: 500, m: 2}}>
-          <ResponseDisplay value={response}/>
-        </Stack>
+        <Stack 
+          direction='row' 
+          sx={{gap: 2, m: 2, height: '100vh'}}
+          justifyContent="center"
+          alignItems="flex-start"
+        >
+        <Card variant="outlined" sx={{gap: 2, width: 350}}>
+          <Box>
+            <Typography level='h2'>Code Review</Typography>
+            <Typography level='body2'>Squash bugs more quickly!</Typography>
+          </Box>
+          <Box>
+            <Input onChange={e => setPrompt(e.target.value)} placeholder='https://...' size='sm' />
+            <Typography sx={{mt: 1}} level='body3'>URL of code file (eg. https://raw.githubusercontent...)</Typography>
+          </Box>
 
-      </Stack>
+          <Button onClick={onClick} variant="soft">Submit</Button>
+        </Card>
+
+          <Box width='600px'>
+            <ResponseDisplay value={response}/>
+
+          </Box>
+        </Stack>
     </CssVarsProvider>
   );
 };

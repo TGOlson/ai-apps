@@ -9,10 +9,10 @@ type ResponseDisplayProps = {
 const ResponseDisplay = ({value}: ResponseDisplayProps) => {
   return (
     <Textarea
-      placeholder="Response will be displayed here."
-      minRows={12}
-      maxRows={12}
+      placeholder="Nothing to see here yet..."
       value={value ?? ''}
+      minRows={6}
+      size='md'
     />
   );
 };
