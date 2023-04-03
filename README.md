@@ -5,5 +5,6 @@ A bunch of tiny AI apps. For fun!
 ### dev
 
 ```
-npx webpack serve
+$ npm install
+$ npx webpack serve
 ```
