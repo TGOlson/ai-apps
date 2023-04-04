@@ -9,6 +9,7 @@ import "./index.css";
 import CodeReview from './pages/CodeReview';
 import Home from './pages/Home';
 import ChatBot from './pages/ChatBot';
+import TweetGen from './pages/TweetGen';
 
 const router = createHashRouter([
   {
@@ -22,6 +23,10 @@ const router = createHashRouter([
       {
         path: "/apps/code-review",
         element: <CodeReview />,
+      },
+      {
+        path: "/apps/tweet-gen",
+        element: <TweetGen />,
       },
       {
         path: "/apps/chatbot",

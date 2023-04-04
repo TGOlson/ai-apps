@@ -14,6 +14,9 @@ const AppNav = () => {
     name: 'Code Review',
     path: '/apps/code-review',
   }, {
+    name: 'Tweet Gen',
+    path: '/apps/tweet-gen',
+  }, {
     name: 'Chatbot',
     path: '/apps/chatbot',
   }];
