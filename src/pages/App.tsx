@@ -25,12 +25,10 @@ const App = () => {
         You are an expert programmer in all languages. Given a code snippet, please provide a concise code review. 
         
         When reviewing the code, make sure you consider the following:
-          * Bugs that would make things not work as expected
+          * Bugs or other issues that would make things not work as expected
           * Security issues
           * Performance improvements
-          * Code that would be complex to maintain
-          * Code duplication
-          * Descriptive variable and function names
+          * Code that would be complex to maintain, such as: code duplication, unclear variable and function names, etc.
           * Any other issues you can think of
 
         Please us the below template for your response:
@@ -39,10 +37,14 @@ const App = () => {
 
         Programming language: {language}
         Code quality score (out of 10): {score}
+        What this code does: {description} (in 200 words or less)
         
-        Code review: {review}
-
-        Should we merge this code to production: {thumbs up or down}
+        Code review:
+          1. Bugs: {bugs}
+          2. Security: {security}
+          3. Performance: {performance}
+          4. Maintainability: {maintainability}
+          5. Other: {other}
 
         ---
 
