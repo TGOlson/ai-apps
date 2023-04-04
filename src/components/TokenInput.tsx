@@ -17,7 +17,7 @@ const TokenInput = () => {
   const tooltip = (
     <Box sx={{width: 350}}>
       <Typography level='inherit'>
-        If you don&apos;t already have an API key, you can create one for free at <a href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a>.
+        If you don&apos;t already have an API key, you can create one for free at <a target='_blank' rel='noreferrer' href="https://platform.openai.com/account/api-keys">https://platform.openai.com/account/api-keys</a>.
       </Typography>
     </Box>
   );

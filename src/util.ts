@@ -41,11 +41,11 @@ export const streamChatGPTCompletions = async (config: Config, messages: Message
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages,
+      temperature: 0.5,
       stream: true,
     }),
   });
 
-  
   const decoder = new TextDecoder();
 
   if (res.status !== 200) {
