@@ -4,11 +4,14 @@ import Button from '@mui/joy/Button';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
+import Option from '@mui/joy/Option';
+import Select from '@mui/joy/Select';
+import Textarea from '@mui/joy/Textarea';
 
 import ResponseDisplay from '../components/ResponseDisplay';
-import { Message, streamChatGPTCompletions } from '../util';
-import { Option, Select, Textarea } from '@mui/joy';
+import ErrorAlert from '../components/ErrorAlert';
 import { useOpenAIToken } from '../hooks/useOpenAIToken';
+import { Message, streamChatGPTCompletions } from '../util';
 
 const createPrompt = (description: string, sentiment: string): string => `
   You run a popular Twitter account with over a million followers, and want to write a new Tweet that will go viral. 
@@ -29,6 +32,8 @@ const TweetGen = () => {
   const [tweetDescription, setTweetDescription] = React.useState('');
   const [tweetSentiment, setTweetSentiment] = React.useState('');
   const [response, setResponse] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<string | null>(null);
+
   const [getToken, _] = useOpenAIToken();
 
   const onClick = () => {
@@ -42,8 +47,8 @@ const TweetGen = () => {
     const token = getToken();
 
     if (!token) {
-      // todo: handler more gracefully
-      throw new Error('No token found');
+      setError('Enter your OpenAI API key to get started.');
+      return;
     }
 
     streamChatGPTCompletions({token}, messages)
@@ -62,7 +67,8 @@ const TweetGen = () => {
         setResponse(result);
       }
     }).catch(error => {
-      console.error(error);
+      const message = error.message || 'An unknown error occurred. Check your API key and try the request again.';
+      setError(message);
     });
   };
 
@@ -95,6 +101,7 @@ const TweetGen = () => {
     </Card>
 
     <Box sx={{minWidth: 400, maxWidth: 600, flexGrow: 1}}>
+      {error ? <ErrorAlert description={error} onClose={() => setError(null)} /> : null}
       <ResponseDisplay value={response}/>
     </Box>
     </React.Fragment>

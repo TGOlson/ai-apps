@@ -104,7 +104,7 @@ const CodeReview = () => {
         <Typography sx={{mt: 1}} level='body3'>URL of code file (eg. https://raw.githubusercontent...)</Typography>
       </Box>
 
-      <Button onClick={onClick} variant="outlined" disabled={!codeUrl}>Submit</Button>
+      <Button onClick={onClick} variant="outlined" disabled={!(codeUrl)}>Submit</Button>
     </Card>
 
     <Box sx={{minWidth: 400, maxWidth: 600, flexGrow: 1}}>

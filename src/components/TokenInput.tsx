@@ -4,9 +4,8 @@ import Input from '@mui/joy/Input';
 import Tooltip from '@mui/joy/Tooltip';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
-
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import KeyIcon from '@mui/icons-material/Key';
+
 import { useOpenAIToken } from '../hooks/useOpenAIToken';
 
 const TokenInput = () => {
@@ -30,7 +29,6 @@ const TokenInput = () => {
       placeholder='OpenAI API Key' 
       defaultValue={getToken() ?? undefined} 
       onChange={event => onChange(event.target.value)}
-      startDecorator={<KeyIcon />}
       endDecorator={
         <Tooltip title={tooltip} variant="soft" size='sm'>
           <HelpOutlineIcon color='primary' />
