@@ -4,6 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npx webpack",
+    "build-prod": "npx webpack --mode production",
+    "serve": "npx webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
