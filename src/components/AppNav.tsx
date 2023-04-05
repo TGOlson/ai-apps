@@ -11,13 +11,13 @@ const AppNav = () => {
 
   const items = [{
     name: 'Code Review',
-    path: '/apps/code-review',
+    path: '/code-review',
   }, {
     name: 'Tweet Gen',
-    path: '/apps/tweet-gen',
+    path: '/tweet-gen',
   }, {
     name: 'Chatbot',
-    path: '/apps/chatbot',
+    path: '/chatbot',
   }];
 
   return (

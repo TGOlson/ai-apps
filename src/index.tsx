@@ -21,15 +21,15 @@ const router = createHashRouter([
         element:<Home />,
       },
       {
-        path: "/apps/code-review",
+        path: "/code-review",
         element: <CodeReview />,
       },
       {
-        path: "/apps/tweet-gen",
+        path: "/tweet-gen",
         element: <TweetGen />,
       },
       {
-        path: "/apps/chatbot",
+        path: "/chatbot",
         element: <ChatBot />,
       },
     ],
