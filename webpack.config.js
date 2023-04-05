@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: 'app.bundle.js',
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist',
+    publicPath: '/assets',
   },
   module: { 
     rules: [{
@@ -33,6 +33,10 @@ module.exports = {
       { 
         directory: path.resolve(__dirname, './public') 
       },   
+      { 
+        directory: path.resolve(__dirname, './dist'),
+        publicPath: '/assets',
+      },
     ],
     port: 3000,
   },
