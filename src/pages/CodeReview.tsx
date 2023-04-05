@@ -45,11 +45,11 @@ ${code}
 
 const CodeReview = () => {
 
-  const [prompt, setPrompt] = React.useState('');
+  const [codeUrl, setCodeUrl] = React.useState('');
   const [response, setResponse] = React.useState<string | null>(null);
 
   const onClick = () => {
-    void fetch(prompt)
+    void fetch(codeUrl)
       .then(response => response.text())
       .then(code => {
 
@@ -94,11 +94,11 @@ const CodeReview = () => {
       <Card variant="outlined" sx={{gap: 2, minWidth: 200, maxWidth: 350}}>
       <Box>
         <Typography level='h2'>Code Review</Typography>
-        <Typography level='body2'>Squash bugs more quickly!</Typography>
+        <Typography level='body2'>Bug squashin&apos;</Typography>
       </Box>
 
       <Box>
-        <Input onChange={e => setPrompt(e.target.value)} placeholder='https://...' size='sm' />
+        <Input onChange={e => setCodeUrl(e.target.value)} placeholder='https://...' size='sm' />
         <Typography sx={{mt: 1}} level='body3'>URL of code file (eg. https://raw.githubusercontent...)</Typography>
       </Box>
 
