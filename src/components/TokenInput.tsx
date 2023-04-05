@@ -4,6 +4,7 @@ import Input from '@mui/joy/Input';
 import Tooltip from '@mui/joy/Tooltip';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
+
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 import { useOpenAIToken } from '../hooks/useOpenAIToken';

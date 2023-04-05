@@ -4,10 +4,10 @@ import Button from '@mui/joy/Button';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
+import Textarea from '@mui/joy/Textarea';
 
 import ResponseDisplay from '../components/ResponseDisplay';
 import { Message, streamChatGPTCompletions } from '../util';
-import { Textarea } from '@mui/joy';
 
 const createPrompt = (description: string, sentiment: string): string => `
   You run a popular Twitter account with over a million followers, and want to write a tweet that will go viral.
