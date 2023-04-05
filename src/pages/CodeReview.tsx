@@ -91,7 +91,7 @@ const CodeReview = () => {
 
   return (
     <React.Fragment>
-      <Card variant="outlined" sx={{gap: 2, minWidth: 200, maxWidth: 350}}>
+      <Card variant="outlined" sx={{gap: 2, width: 350}}>
       <Box>
         <Typography level='h2'>Code Review</Typography>
         <Typography level='body2'>Bug squashin&apos;</Typography>
@@ -102,7 +102,7 @@ const CodeReview = () => {
         <Typography sx={{mt: 1}} level='body3'>URL of code file (eg. https://raw.githubusercontent...)</Typography>
       </Box>
 
-      <Button onClick={onClick} variant="soft">Submit</Button>
+      <Button onClick={onClick} variant="outlined" disabled={!codeUrl}>Submit</Button>
     </Card>
 
     <Box sx={{minWidth: 400, maxWidth: 600, flexGrow: 1}}>

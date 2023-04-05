@@ -3,12 +3,12 @@ import List from '@mui/joy/List';
 // import ListItem from '@mui/joy/ListItem';
 import MenuList from '@mui/joy/MenuList';
 import MenuItem from '@mui/joy/MenuItem';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 // import Typography from '@mui/joy/Typography';
 
 const AppNav = () => {
   const navigate = useNavigate();
-
+  const currentPath = useLocation().pathname;
 
   const items = [{
     name: 'Code Review',
@@ -27,17 +27,14 @@ const AppNav = () => {
       variant="outlined"
       size="sm"
       sx={{
-        // boxShadow: 'sm',
-        // flexGrow: 0,
         minWidth: 200,
         maxWidth: 200,
-        // maxHeight: 240,
         overflow: 'auto',
       }}
     >
       <List >
       {items.map(({name, path}, index) => (
-        <MenuItem selected={index === 0} key={index} onClick={() => navigate(path)}>
+        <MenuItem selected={path === currentPath} key={index} onClick={() => navigate(path)}>
           {name}
         </MenuItem>
       ))}

@@ -15,7 +15,7 @@ const createPrompt = (description: string, sentiment: string): string => `
   Write a ${sentiment} Tweet about "${description}". Make your response the Tweet itself, and do not include any other text. Do not adds quotes around the Tweet.
 
   Use the following guidelines when drafting your tweet:
-  
+
   * Do NOT use more than 280 total characters in the Tweet
   * Use any formatting or emojis seem to make sense for the Tweet
   * Do NOT use hashtags (eg. #) unless specifically asked for in the description
@@ -89,7 +89,7 @@ const TweetGen = () => {
         <Typography sx={{mt: 1}} level='body3'>Select what sentiment you want the Tweet to have. </Typography>
       </Box>
 
-      <Button onClick={onClick} variant="soft">Submit</Button>
+      <Button onClick={onClick} variant="outlined" disabled={!(tweetDescription && tweetSentiment)}>Submit</Button>
     </Card>
 
     <Box sx={{minWidth: 400, maxWidth: 600, flexGrow: 1}}>

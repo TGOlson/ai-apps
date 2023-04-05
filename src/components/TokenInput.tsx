@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Input from '@mui/joy/Input';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import Tooltip from '@mui/joy/Tooltip';
-import { Box, Typography } from '@mui/joy';
+import Box from '@mui/joy/Box';
+import Typography from '@mui/joy/Typography';
+
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import KeyIcon from '@mui/icons-material/Key';
-// import { IconButton } from '@mui/joy';
 
 const TokenInput = () => {
   const initialValue = localStorage.getItem('opanai-token');
@@ -21,7 +22,6 @@ const TokenInput = () => {
       </Typography>
     </Box>
   );
-  
 
   return (
     <Input 

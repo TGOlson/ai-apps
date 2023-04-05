@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Textarea from '@mui/joy/Textarea';
-import { Typography } from '@mui/joy';
+import Typography from '@mui/joy/Typography';
 
 type ResponseDisplayProps = {
   value: null | string;
