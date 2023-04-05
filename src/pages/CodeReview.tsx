@@ -8,6 +8,7 @@ import Typography from '@mui/joy/Typography';
 
 import ResponseDisplay from '../components/ResponseDisplay';
 import { Message, streamChatGPTCompletions } from '../util';
+import { useOpenAIToken } from '../hooks/useOpenAIToken';
 
 const createPrompt = (code: string): string => `
 You are an expert programmer in all programming languages. A peer programmer has asked you to review their code.
@@ -47,6 +48,7 @@ const CodeReview = () => {
 
   const [codeUrl, setCodeUrl] = React.useState('');
   const [response, setResponse] = React.useState<string | null>(null);
+  const [getToken, _] = useOpenAIToken();
 
   const onClick = () => {
     void fetch(codeUrl)
@@ -60,7 +62,7 @@ const CodeReview = () => {
           content,
         }];
         
-        const token = localStorage.getItem('opanai-token');
+        const token = getToken();
 
         if (!token) {
           // todo: handler more gracefully

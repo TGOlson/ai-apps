@@ -8,6 +8,7 @@ import Typography from '@mui/joy/Typography';
 import ResponseDisplay from '../components/ResponseDisplay';
 import { Message, streamChatGPTCompletions } from '../util';
 import { Option, Select, Textarea } from '@mui/joy';
+import { useOpenAIToken } from '../hooks/useOpenAIToken';
 
 const createPrompt = (description: string, sentiment: string): string => `
   You run a popular Twitter account with over a million followers, and want to write a new Tweet that will go viral. 
@@ -28,16 +29,17 @@ const TweetGen = () => {
   const [tweetDescription, setTweetDescription] = React.useState('');
   const [tweetSentiment, setTweetSentiment] = React.useState('');
   const [response, setResponse] = React.useState<string | null>(null);
+  const [getToken, _] = useOpenAIToken();
 
   const onClick = () => {
     const content = createPrompt(tweetDescription, tweetSentiment);
-
+    
     const messages: Message[] = [{
       role: 'user',
       content,
     }];
-        
-    const token = localStorage.getItem('opanai-token');
+    
+    const token = getToken();
 
     if (!token) {
       // todo: handler more gracefully

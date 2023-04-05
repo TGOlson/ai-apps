@@ -7,13 +7,12 @@ import Typography from '@mui/joy/Typography';
 
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import KeyIcon from '@mui/icons-material/Key';
+import { useOpenAIToken } from '../hooks/useOpenAIToken';
 
 const TokenInput = () => {
-  const initialValue = localStorage.getItem('opanai-token');
+  const [getToken, setToken] = useOpenAIToken();
 
-  const onChange = (token: string) => {
-    localStorage.setItem('opanai-token', token);
-  };
+  const onChange = (token: string) => setToken(token);
 
   const tooltip = (
     <Box sx={{width: 350}}>
@@ -29,7 +28,7 @@ const TokenInput = () => {
       type='password'
       sx={{ width: 300 }}
       placeholder='OpenAI API Key' 
-      defaultValue={initialValue ?? undefined} 
+      defaultValue={getToken() ?? undefined} 
       onChange={event => onChange(event.target.value)}
       startDecorator={<KeyIcon />}
       endDecorator={
